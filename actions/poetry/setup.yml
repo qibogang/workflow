@@ -1,0 +1,23 @@
+name: Set up Poetry
+description: |
+  Instrument Poetry and Poe the Poet CLIs.
+
+inputs:
+  python-version:
+    description: "Used python version"
+    required: true
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Install poetry
+      run: |
+        pipx install poetry
+        # and the task runner
+        pipx inject poetry poethepoet --include-apps
+    - name: Setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: "poetry"

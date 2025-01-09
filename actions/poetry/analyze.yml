@@ -1,0 +1,17 @@
+name: Analyze
+description: |
+  Scan Python code statically.
+  Invoking:
+    - type-checker
+    - linter
+
+runs:
+  using: composite
+  steps:
+    - name: Type-check
+      run: |
+        poe types
+    - name: Lint
+      run: |
+        poe lint
+        poe lint-warnings
