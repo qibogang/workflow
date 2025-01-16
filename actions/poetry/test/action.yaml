@@ -8,17 +8,18 @@ inputs:
       Enable examples test.
       Only available on Linux.
     required: false
-    type: boolean
-    default: false
+    default: "false"
 
 runs:
   using: composite
   steps:
     - name: Test
+      shell: bash
       run: |
         poe test
     - name: Test documentation examples
-      if: ${{ inputs.doctests }}
+      shell: bash
+      if: ${{ inputs.doctests != "false" }}
       run: |
         sudo apt install pandoc
         make -C doc doctest
