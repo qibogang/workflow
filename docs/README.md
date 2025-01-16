@@ -20,7 +20,7 @@ jobs:
   caller-job:
     uses: qiboteam/workflows/.github/workflows/docs.yml@main
     with:
-      python-version: 3.11
+      python-version: "3.11"
 ```
 
 # Actions
