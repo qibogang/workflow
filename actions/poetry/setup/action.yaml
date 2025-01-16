@@ -6,12 +6,12 @@ inputs:
   python-version:
     description: "Used python version"
     required: true
-    type: string
 
 runs:
   using: composite
   steps:
     - name: Install poetry
+      shell: bash
       run: |
         pipx install poetry
         # and the task runner
