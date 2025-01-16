@@ -27,7 +27,7 @@ runs:
       if: inputs.doctests != 'false'
       run: |
         sudo apt install pandoc
-        source $VENV
+        eval $(poetry env activate)
         make -C doc doctest
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
