@@ -1,0 +1,40 @@
+name: Test
+description: |
+  Execute test suite, and upload report.
+
+inputs:
+  doctests:
+    description: |
+      Enable examples test.
+      Only available on Linux.
+    required: false
+    default: "false"
+  codecov_token:
+    description: |
+      Token required to upload the coverage report to Codecov.
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Test
+      shell: bash
+      run: |
+        poe test
+    - name: Test documentation examples
+      shell: bash
+      if: inputs.doctests != 'false'
+      run: |
+        sudo apt install pandoc
+        eval $(poetry env activate)
+        make -C doc doctest
+    - name: Upload coverage to Codecov
+      if: startsWith(runner.os, 'Linux')
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.xml
+        flags: unittests
+        name: unit-tests
+        fail_ci_if_error: true
+        token: ${{ inputs.codecov_token }}

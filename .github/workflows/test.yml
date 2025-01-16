@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: "Used operation system"
+        required: true
+        type: string
+      python-version:
+        description: "Used python version"
+        required: true
+        type: string
+      poetry-extras:
+        description: "poetry extra flags"
+        required: false
+        type: string
+        default: ""
+      doctests:
+        description: "Enable examples test"
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      codecov_token:
+        required: false
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: qiboteam/workflows/actions/poetry/setup@v2
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install project
+        run: poetry install ${{ inputs.poetry-extras }}
+      - uses: qiboteam/workflows/actions/poetry/analyze@v2
+      - uses: qiboteam/workflows/actions/poetry/test@v2
+        with:
+          doctests: ${{ toJSON(inputs.doctests) }}
+          codecov_token: ${{ secrets.codecov_token }}
