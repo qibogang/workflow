@@ -25,12 +25,14 @@ on:
       codecov_token:
         required: false
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  build:
+  analyze:
     runs-on: ${{ inputs.os }}
-    defaults:
-      run:
-        shell: bash
+
     steps:
       - uses: actions/checkout@v4
       - uses: qiboteam/workflows/actions/poetry/setup@v2
@@ -39,6 +41,17 @@ jobs:
       - name: Install project
         run: poetry install ${{ inputs.poetry-extras }}
       - uses: qiboteam/workflows/actions/poetry/analyze@v2
+
+  test:
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: qiboteam/workflows/actions/poetry/setup@v2
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install project
+        run: poetry install ${{ inputs.poetry-extras }}
       - uses: qiboteam/workflows/actions/poetry/test@v2
         with:
           doctests: ${{ toJSON(inputs.doctests) }}
