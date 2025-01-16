@@ -16,6 +16,9 @@ runs:
       id: classify
       shell: bash
       run: |
+        echo ${{ github.ref }}
+        echo ${{ github.ref_type }}
+
         if [[ "${{ github.ref  }}" == "refs/heads/main" ]]; then
               echo "version=latest" >> $GITHUB_OUTPUT
         fi
