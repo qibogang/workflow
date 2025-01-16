@@ -33,12 +33,12 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v4
-      - uses: qiboteam/workflows/actions/poetry/setup.yml@to-actions
+      - uses: qiboteam/workflows/actions/poetry/setup@to-actions
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
         run: poetry install ${{ inputs.poetry-extras }}
-      - uses: qiboteam/workflows/actions/analyze@v2
-      - uses: qiboteam/workflows/actions/test@v2
+      - uses: qiboteam/workflows/actions/poetry/analyze@to-actions
+      - uses: qiboteam/workflows/actions/poetry/test@to-actions
         with:
           doctests: ${{ inputs.doctests }}
