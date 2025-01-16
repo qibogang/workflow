@@ -33,7 +33,7 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v4
-      - uses: qiboteam/workflows/actions/setup.yml@to-actions
+      - uses: qiboteam/workflows/actions/poetry/setup@to-actions
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
