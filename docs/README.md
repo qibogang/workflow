@@ -22,3 +22,8 @@ jobs:
     with:
       python-version: 3.11
 ```
+
+# Actions
+
+For workflows developers: some workflows' building blocks are split as individual
+[actions](./actions).
