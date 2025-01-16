@@ -42,3 +42,4 @@ jobs:
       - uses: qiboteam/workflows/actions/poetry/test@to-actions
         with:
           doctests: ${{ inputs.doctests }}
+          codecov_token: ${{ secrets.codecov_token }}

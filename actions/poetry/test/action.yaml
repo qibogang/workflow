@@ -9,6 +9,11 @@ inputs:
       Only available on Linux.
     required: false
     default: "false"
+  codecov_token:
+    description: |
+      Token required to upload the coverage report to Codecov.
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -19,7 +24,7 @@ runs:
         poe test
     - name: Test documentation examples
       shell: bash
-      if: ${{ inputs.doctests != "false" }}
+      if: inputs.doctests != 'false'
       run: |
         sudo apt install pandoc
         make -C doc doctest
@@ -31,4 +36,4 @@ runs:
         flags: unittests
         name: unit-tests
         fail_ci_if_error: true
-        token: ${{ secrets.codecov_token }}
+        token: ${{ inputs.codecov_token }}
