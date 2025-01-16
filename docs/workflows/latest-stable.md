@@ -9,10 +9,7 @@ uses: qiboteam/workflows/.github/workflows/latest-stable.yml@v2
 with:
   # The python version to be installed.
   # Mandatory input
-  python-version: 3.9
-  # Specify the path to the dependency file
-  # Mandatory input
-  dependency-path: "**/setup.py"
+  python-version: 3.11
   # Project's name
   # Mandatory input
   project: qibo

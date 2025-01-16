@@ -13,7 +13,7 @@ with:
     os: "ubuntu-latest"
     # The python version to be installed.
     # Mandatory input
-    python-version: 3.9
+    python-version: 3.11
     # If 'publish' is true the repository
     # will be published.
     # Default: false

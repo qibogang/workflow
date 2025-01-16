@@ -1,26 +1,29 @@
-The repository **qiboteam/workflow** is a collection of **reusable workflows**
-used by the qiboteam organization. The workflows are availaible in the folder
-[`github/workflows`](https://github.com/qiboteam/workflows/tree/main/.github/workflows).
+The repository **qiboteam/workflow** is a collection of **reusable workflows** used
+across the qiboteam organization. The workflows are availaible in the folder
+[`github/workflows`](https://github.com/qiboteam/workflows/tree/v2/.github/workflows).
 
 # Available workflows
 
-- [`docs`](./docs.md)
-- [`latest-stable`](./latest-stable.md)
-- [`test`](./test.md)
-- [`wheels`](./wheels.md)
+- [`test`](./workflows/test.md)
+- [`wheels`](./workflows/wheels.md)
+- [`docs`](./workflows/docs.md)
+- [`latest-stable`](./workflows/latest-stable.md)
+- [`selfhosted`](./workflows/selfhosted.md)
 
-## How to use a reusable workflow ?
+## How to run a reusable workflow ?
 
-If you want to use the **reusable workflow**
-`deploy-sphinx-docs-to-ghpages.yml`, all you have to do is to add the `uses`
-keyword in a job of your workflow, for example
+Using `docs.yml` as an example, the only action required is to add the `uses` keyword in
+a job of the caller workflow, e.g.
 
 ```yaml
 jobs:
-  call-workflow-in-local-repo:
-    uses: qiboteam/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
+  caller-job:
+    uses: qiboteam/workflows/.github/workflows/docs.yml@main
     with:
-      python-version: 3.9
-      package-manager: "pip"
-      dependency-path: "**/setup.py"
+      python-version: 3.11
 ```
+
+# Actions
+
+For workflows developers: some workflows' building blocks are split as individual
+[actions](./actions).
