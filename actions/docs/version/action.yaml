@@ -6,14 +6,13 @@ description: |
 outputs:
   version:
     description: "The discriminated version"
-    value: ${{ steps.classify.outputs.random-id }}
+    value: ${{ steps.classify.outputs.version }}
 
 runs:
   using: composite
 
   steps:
-    - name: checks for the label
-      id: classify
+    - id: classify
       shell: bash
       run: |
         echo ${{ github.ref }}
