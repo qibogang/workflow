@@ -1,0 +1,26 @@
+name: Determine docs version
+description: |
+  Discriminate between stable (last tag) and latest (most recent default branch)
+  versions
+
+outputs:
+  version:
+    description: "The discriminated version"
+    value: ${{ steps.classify.outputs.random-id }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: checks for the label
+      id: classify
+      run: |
+        if [[ "${{ github.ref  }}" == "refs/heads/main" ]]; then
+              echo "version=latest" >> $GITHUB_OUTPUT
+        fi
+        if [[ "${{ github.ref_type }}" == "branch" ]] && [[ "${{ github.ref  }}" != "refs/heads/main" ]]; then
+              exit 1
+        fi
+        if [[ "${{ github.ref_type }}" == "tag" ]]; then
+              echo "version=stable" >> $GITHUB_OUTPUT
+        fi
