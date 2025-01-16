@@ -7,10 +7,6 @@ on:
         description: "Used python version"
         required: true
         type: string
-      dependency-path:
-        description: "Path to the dependency file"
-        required: true
-        type: string
       poetry-extras:
         description: "poetry extra flags"
         required: false

@@ -7,10 +7,6 @@ on:
         description: "Used Python version"
         required: true
         type: string
-      dependency-path:
-        description: "Path to the dependency file"
-        required: true
-        type: string
       project:
         description: "Project name"
         required: true
@@ -59,7 +55,6 @@ jobs:
     uses: ./.github/workflows/docs.yml
     with:
       python-version: ${{ inputs.python-version }}
-      dependency-path: ${{ inputs.dependency-path }}
       poetry-extras: ${{ inputs.poetry-extras }}
 
   new-artifact:
