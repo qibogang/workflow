@@ -10,14 +10,14 @@ across the qiboteam organization. The workflows are availaible in the folder
 - [`latest-stable`](./workflows/latest-stable.md)
 - [`selfhosted`](./workflows/selfhosted.md)
 
-## How to use a reusable workflow ?
+## How to run a reusable workflow ?
 
-If you want to use the **reusable workflow** `docs.yml`, all you have to do is to add
-the `uses` keyword in a job of your workflow, for example
+Using `docs.yml` as an example, the only action required is to add the `uses` keyword in
+a job of the caller workflow, e.g.
 
 ```yaml
 jobs:
-  calling-job:
+  caller-job:
     uses: qiboteam/workflows/.github/workflows/docs.yml@main
     with:
       python-version: 3.11
