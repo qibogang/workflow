@@ -15,15 +15,11 @@ runs:
     - id: classify
       shell: bash
       run: |
-        echo ${{ github.ref }}
-        echo ${{ github.ref_type }}
-
         if [[ "${{ github.ref  }}" == "refs/heads/main" ]]; then
               echo "version=latest" >> $GITHUB_OUTPUT
         fi
         if [[ "${{ github.ref_type }}" == "branch" ]] && [[ "${{ github.ref  }}" != "refs/heads/main" ]]; then
-              echo "version=ciao" >> $GITHUB_OUTPUT
-              # exit 1
+              exit 1
         fi
         if [[ "${{ github.ref_type }}" == "tag" ]]; then
               echo "version=stable" >> $GITHUB_OUTPUT
