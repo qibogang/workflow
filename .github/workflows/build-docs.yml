@@ -55,7 +55,7 @@ jobs:
           poe docs
         if: ${{ inputs.package-manager == 'poetry' }}
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation
           path: ${{ inputs.path-doc }}/build/html
