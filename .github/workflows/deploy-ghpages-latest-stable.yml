@@ -120,7 +120,7 @@ jobs:
         tar -czvf stable.tar.gz ./stable 
     # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v3
       with:
         path: new_docs
     
